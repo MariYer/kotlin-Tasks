@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity">
+
+    <item android:id="@+id/actionGetDepartments"
+        android:title="@string/orgMenuCaptionDepartments"/>
+    <item android:id="@+id/actionGetPosts"
+        android:title="@string/orgMenuCaptionPosts"/>
+    <item android:id="@+id/actionGetStaffTable"
+        android:title="@string/orgMenuCaptionStaffTable"/>
+    <item android:id="@+id/actionGetEmployersStaff"
+        android:title="@string/orgMenuCaptionEmployersStaff"/>
+
+</menu>

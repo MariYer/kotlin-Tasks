@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.mariyer.taskmanager.ui.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_organizationsListFragment"
+            app:destination="@id/organizationsListFragment"
+            app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_projectsListFragment"
+            app:destination="@id/projectsListFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/organizationsListFragment"
+        android:name="com.mariyer.taskmanager.ui.lists.OrganizationsListFragment"
+        android:label="OrganizationsListFragment"
+        tools:layout="@layout/fragment_organization_list">
+        <action
+            android:id="@+id/action_organizationsListFragment_to_organizationDetailFragment"
+            app:destination="@id/organizationDetailFragment"
+            app:popUpTo="@id/organizationsListFragment" />
+        <action
+            android:id="@+id/action_organizationsListFragment_to_organizationAddFragment"
+            app:destination="@id/organizationAddFragment"
+            app:popUpTo="@id/organizationsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/departmentsListFragment"
+        android:name="com.mariyer.taskmanager.ui.lists.DepartmentsListFragment"
+        android:label="DepartmentsListFragment"
+        tools:layout="@layout/fragment_departments_list">
+        <argument
+            android:name="orgId"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_departmentsListFragment_to_departmentAddFragment"
+            app:destination="@id/departmentAddFragment"
+            app:popUpTo="@id/departmentsListFragment" />
+        <action
+            android:id="@+id/action_departmentsListFragment_to_departmentDetailFragment"
+            app:destination="@id/departmentDetailFragment"
+            app:popUpTo="@id/departmentsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postsListFragment"
+        android:name="com.mariyer.taskmanager.ui.lists.PostsListFragment"
+        android:label="PostsListFragment"
+        tools:layout="@layout/fragment_posts_list">
+        <argument
+            android:name="orgId"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_postsListFragment_to_postAddFragment"
+            app:destination="@id/postAddFragment"
+            app:popUpTo="@id/postsListFragment" />
+        <action
+            android:id="@+id/action_postsListFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment"
+            app:popUpTo="@id/postsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/organizationDetailFragment"
+        android:name="com.mariyer.taskmanager.ui.details.OrganizationDetailFragment"
+        android:label="OrganizationDetailFragment"
+        tools:layout="@layout/fragment_organization_detail">
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_organizationDetailFragment_to_departmentsListFragment"
+            app:destination="@id/departmentsListFragment"
+            app:popUpTo="@id/organizationDetailFragment" />
+        <action
+            android:id="@+id/action_organizationDetailFragment_to_postsListFragment"
+            app:destination="@id/postsListFragment"
+            app:popUpTo="@id/organizationDetailFragment" />
+        <action
+            android:id="@+id/action_organizationDetailFragment_to_staffTableFragment"
+            app:destination="@id/staffTableFragment"
+            app:popUpTo="@id/organizationDetailFragment" />
+        <action
+            android:id="@+id/action_organizationDetailFragment_to_employerListFragment"
+            app:destination="@id/employerListFragment"
+            app:popUpTo="@id/organizationDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/organizationAddFragment"
+        android:name="com.mariyer.taskmanager.ui.details.OrganizationAddFragment"
+        android:label="OrganizationAddFragment"
+        tools:layout="@layout/fragment_organization_detail"/>
+    <fragment
+        android:id="@+id/departmentAddFragment"
+        android:name="com.mariyer.taskmanager.ui.details.DepartmentAddFragment"
+        android:label="DepartmentAddFragment"
+        tools:layout="@layout/fragment_department_detail">
+        <argument
+            android:name="orgId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/departmentDetailFragment"
+        android:name="com.mariyer.taskmanager.ui.details.DepartmentDetailFragment"
+        android:label="DepartmentDetailFragment"
+        tools:layout="@layout/fragment_department_detail">
+        <argument
+            android:name="depId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.mariyer.taskmanager.ui.details.PostDetailFragment"
+        android:label="PostDetailFragment"
+        tools:layout="@layout/fragment_post_detail">
+        <argument
+            android:name="postId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/postAddFragment"
+        android:name="com.mariyer.taskmanager.ui.details.PostAddFragment"
+        android:label="PostAddFragment"
+        tools:layout="@layout/fragment_post_detail">
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/staffTableFragment"
+        android:name="com.mariyer.taskmanager.ui.lists.StaffTableListFragment"
+        android:label="StaffTableFragment"
+        tools:layout="@layout/fragment_staff_table_list">
+        <argument android:name="orgId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_staffTableFragment_to_staffTableAddFragment"
+            app:destination="@id/staffTableAddFragment" />
+        <action
+            android:id="@+id/action_staffTableFragment_to_staffTableDetailFragment"
+            app:destination="@id/staffTableDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/staffTableAddFragment"
+        android:name="com.mariyer.taskmanager.ui.details.StaffTableAddFragment"
+        android:label="StaffTableAddFragment"
+        tools:layout="@layout/fragment_staff_table_detail">
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/staffTableDetailFragment"
+        android:name="com.mariyer.taskmanager.ui.details.StaffTableDetailFragment"
+        android:label="StaffTableDetailFragment"
+        tools:layout="@layout/fragment_staff_table_detail">
+        <argument
+            android:name="depId"
+            app:argType="long" />
+        <argument
+            android:name="postId"
+            app:argType="long" />
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/employerListFragment"
+        android:name="com.mariyer.taskmanager.ui.lists.EmployerListFragment"
+        android:label="EmployerListFragment"
+        tools:layout="@layout/fragment_employer_list">
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_employerListFragment_to_employerAddFragment"
+            app:destination="@id/employerAddFragment"
+            app:popUpTo="@id/employerListFragment" />
+        <action
+            android:id="@+id/action_employerListFragment_to_employerDetailFragment"
+            app:destination="@id/employerDetailFragment"
+            app:popUpTo="@id/employerListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/employerAddFragment"
+        android:name="com.mariyer.taskmanager.ui.details.EmployerAddFragment"
+        android:label="EmployerAddFragment"
+        tools:layout="@layout/fragment_employer_detail">
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectsListFragment"
+        android:name="com.mariyer.taskmanager.ui.lists.ProjectsListFragment"
+        android:label="ProjectsListFragment"
+        tools:layout="@layout/fragment_projects_list">
+        <action
+            android:id="@+id/action_projectsListFragment_to_projectAddFragment"
+            app:destination="@id/projectAddFragment"
+            app:popUpTo="@id/projectsListFragment" />
+        <action
+            android:id="@+id/action_projectsListFragment_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment"
+            app:popUpTo="@id/projectsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectAddFragment"
+        android:name="com.mariyer.taskmanager.ui.details.ProjectAddFragment"
+        android:label="ProjectAddFragment"
+        tools:layout="@layout/fragment_project_detail"/>
+    <fragment
+        android:id="@+id/projectDetailFragment"
+        android:name="com.mariyer.taskmanager.ui.details.ProjectDetailFragment"
+        android:label="ProjectDetailFragment"
+        tools:layout="@layout/fragment_project_detail">
+        <argument
+            android:name="projId"
+            app:argType="long" />
+        <argument android:name="orgId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_projectDetailFragment_to_tasksListFragment"
+            app:destination="@id/tasksListFragment"
+            app:popUpTo="@id/projectDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tasksListFragment"
+        android:name="com.mariyer.taskmanager.ui.lists.TasksListFragment"
+        android:label="TasksListFragment"
+        tools:layout="@layout/fragment_tasks_list">
+        <argument
+            android:name="projId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_tasksListFragment_to_taskAddFragment"
+            app:destination="@id/taskAddFragment"
+            app:popUpTo="@id/tasksListFragment" />
+        <action
+            android:id="@+id/action_tasksListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment"
+            app:popUpTo="@id/tasksListFragment" />
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskAddFragment"
+        android:name="com.mariyer.taskmanager.ui.details.TaskAddFragment"
+        android:label="TaskAddFragment"
+        tools:layout="@layout/fragment_task_detail">
+        <argument
+            android:name="projId"
+            app:argType="long" />
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.mariyer.taskmanager.ui.details.TaskDetailFragment"
+        android:label="TaskDetailFragment"
+        tools:layout="@layout/fragment_task_detail">
+        <argument
+            android:name="taskId"
+            app:argType="long" />
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/employerDetailFragment"
+        android:name="com.mariyer.taskmanager.ui.details.EmployerDetailFragment"
+        android:label="EmployerDetailFragment"
+        tools:layout="@layout/fragment_employer_detail">
+        <argument
+            android:name="orgId"
+            app:argType="long" />
+        <argument
+            android:name="emplId"
+            app:argType="long" />
+    </fragment>
+</navigation>

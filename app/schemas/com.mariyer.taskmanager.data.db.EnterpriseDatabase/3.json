@@ -1,0 +1,743 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "ea7ebc44a270fcf67477e326304ebbb8",
+    "entities": [
+      {
+        "tableName": "organizations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `full_title` TEXT NOT NULL, `entity` INTEGER NOT NULL, `inn` TEXT NOT NULL, `notes` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fullTitle",
+            "columnName": "full_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entity",
+            "columnName": "entity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "inn",
+            "columnName": "inn",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "departments",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `organization_id` INTEGER NOT NULL, `parent_id` INTEGER, `title` TEXT NOT NULL, FOREIGN KEY(`organization_id`) REFERENCES `organizations`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`parent_id`) REFERENCES `departments`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "organizationId",
+            "columnName": "organization_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parentId",
+            "columnName": "parent_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_departments_organization_id",
+            "unique": false,
+            "columnNames": [
+              "organization_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_departments_organization_id` ON `${TABLE_NAME}` (`organization_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "organizations",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "organization_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "departments",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "parent_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "posts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `organization_id` INTEGER NOT NULL, `title` TEXT NOT NULL, FOREIGN KEY(`organization_id`) REFERENCES `organizations`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "organizationId",
+            "columnName": "organization_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_posts_organization_id",
+            "unique": false,
+            "columnNames": [
+              "organization_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_posts_organization_id` ON `${TABLE_NAME}` (`organization_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "organizations",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "organization_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "staff_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`department_id` INTEGER NOT NULL, `post_id` INTEGER NOT NULL, `is_chief` INTEGER NOT NULL, `basic_salary` TEXT, `max_count` INTEGER NOT NULL DEFAULT 1, PRIMARY KEY(`department_id`, `post_id`), FOREIGN KEY(`department_id`) REFERENCES `departments`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`post_id`) REFERENCES `posts`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "departmentId",
+            "columnName": "department_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postId",
+            "columnName": "post_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isChief",
+            "columnName": "is_chief",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "basicSalary",
+            "columnName": "basic_salary",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "maxCount",
+            "columnName": "max_count",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "department_id",
+            "post_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "departments",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "department_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "posts",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "post_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "employers",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `organization_id` INTEGER NOT NULL, `photo_url` TEXT, `surname` TEXT NOT NULL, `name` TEXT NOT NULL, `middle_name` TEXT, `birthday` TEXT, `sex` INTEGER NOT NULL, `phone` TEXT NOT NULL, `email` TEXT, `address` TEXT NOT NULL, FOREIGN KEY(`organization_id`) REFERENCES `organizations`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "organizationId",
+            "columnName": "organization_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "photoUrl",
+            "columnName": "photo_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "surname",
+            "columnName": "surname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "middleName",
+            "columnName": "middle_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sex",
+            "columnName": "sex",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_employers_organization_id",
+            "unique": false,
+            "columnNames": [
+              "organization_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_employers_organization_id` ON `${TABLE_NAME}` (`organization_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "organizations",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "organization_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "employers_staff",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `department_id` INTEGER NOT NULL, `post_id` INTEGER NOT NULL, `employer_id` INTEGER NOT NULL, `date_start` TEXT NOT NULL, `date_end` TEXT, FOREIGN KEY(`department_id`, `post_id`) REFERENCES `staff_table`(`department_id`, `post_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`employer_id`) REFERENCES `employers`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "departmentId",
+            "columnName": "department_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postId",
+            "columnName": "post_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "employerId",
+            "columnName": "employer_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateStart",
+            "columnName": "date_start",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateEnd",
+            "columnName": "date_end",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_employers_staff_employer_id",
+            "unique": false,
+            "columnNames": [
+              "employer_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_employers_staff_employer_id` ON `${TABLE_NAME}` (`employer_id`)"
+          },
+          {
+            "name": "index_employers_staff_department_id",
+            "unique": false,
+            "columnNames": [
+              "department_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_employers_staff_department_id` ON `${TABLE_NAME}` (`department_id`)"
+          },
+          {
+            "name": "index_employers_staff_post_id",
+            "unique": false,
+            "columnNames": [
+              "post_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_employers_staff_post_id` ON `${TABLE_NAME}` (`post_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "staff_table",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "department_id",
+              "post_id"
+            ],
+            "referencedColumns": [
+              "department_id",
+              "post_id"
+            ]
+          },
+          {
+            "table": "employers",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "employer_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "projects",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `department_id` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `date_start` TEXT NOT NULL, `date_end` TEXT, FOREIGN KEY(`department_id`) REFERENCES `departments`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "departmentId",
+            "columnName": "department_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateStart",
+            "columnName": "date_start",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateEnd",
+            "columnName": "date_end",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_projects_department_id",
+            "unique": false,
+            "columnNames": [
+              "department_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_projects_department_id` ON `${TABLE_NAME}` (`department_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "departments",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "department_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "tasks_states",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "tasks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `project_id` INTEGER NOT NULL, `requester_id` INTEGER NOT NULL, `executor_id` INTEGER, `state_id` INTEGER NOT NULL, `title` TEXT NOT NULL, `priority` INTEGER NOT NULL, `description` TEXT NOT NULL, `created_at` TEXT NOT NULL, `deadline` TEXT NOT NULL, `started_at` TEXT, `ended_at` TEXT, `department_for_id` INTEGER, FOREIGN KEY(`project_id`) REFERENCES `projects`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`requester_id`) REFERENCES `employers_staff`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`executor_id`) REFERENCES `employers_staff`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`state_id`) REFERENCES `tasks_states`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`department_for_id`) REFERENCES `departments`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "projectId",
+            "columnName": "project_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "requesterId",
+            "columnName": "requester_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "executorId",
+            "columnName": "executor_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stateId",
+            "columnName": "state_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "priority",
+            "columnName": "priority",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deadline",
+            "columnName": "deadline",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startedAt",
+            "columnName": "started_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endedAt",
+            "columnName": "ended_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "departmentForId",
+            "columnName": "department_for_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_tasks_project_id",
+            "unique": false,
+            "columnNames": [
+              "project_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_tasks_project_id` ON `${TABLE_NAME}` (`project_id`)"
+          },
+          {
+            "name": "index_tasks_requester_id",
+            "unique": false,
+            "columnNames": [
+              "requester_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_tasks_requester_id` ON `${TABLE_NAME}` (`requester_id`)"
+          },
+          {
+            "name": "index_tasks_executor_id",
+            "unique": false,
+            "columnNames": [
+              "executor_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_tasks_executor_id` ON `${TABLE_NAME}` (`executor_id`)"
+          },
+          {
+            "name": "index_tasks_state_id",
+            "unique": false,
+            "columnNames": [
+              "state_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_tasks_state_id` ON `${TABLE_NAME}` (`state_id`)"
+          },
+          {
+            "name": "index_tasks_department_for_id",
+            "unique": false,
+            "columnNames": [
+              "department_for_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_tasks_department_for_id` ON `${TABLE_NAME}` (`department_for_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "projects",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "project_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "employers_staff",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "requester_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "employers_staff",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "executor_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "tasks_states",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "state_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "departments",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "department_for_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ea7ebc44a270fcf67477e326304ebbb8')"
+    ]
+  }
+}

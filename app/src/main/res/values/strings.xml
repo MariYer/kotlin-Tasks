@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Управление проектами</string>
+    <string name="hintTitleOrganization">Наименование организации (краткое)</string>
+    <string name="hintInnOrganization">ИНН организации</string>
+    <string name="hintFullTitleOrganization">Наименование организации (полное)</string>
+    <string name="captionDepartmentsButton">Подразделения</string>
+    <string name="captionPostsButton">Должности</string>
+    <string name="captionStaffTableButton">Штатное расписание</string>
+    <string name="captionEmplStaffButton">Сотрудники</string>
+    <string name="hintNotesOrganization">Описание организации</string>
+    <string name="captionJur">Юридическое лицо</string>
+    <string name="captionPriv">Физическое лицо</string>
+    <string name="orgMenuCaptionDepartments">Структура (подразделения)</string>
+    <string name="orgMenuCaptionPosts">Должности</string>
+    <string name="orgMenuCaptionStaffTable">Штатное расписание</string>
+    <string name="orgMenuCaptionEmployersStaff">Сотрудники</string>
+    <string name="captionSaveButton">Сохранить</string>
+    <string name="no_seletion">Не выбрано</string>
+    <string name="hintParentTextInput">Выберите родительское подразделение</string>
+    <string name="hintTitleEditText">Введите наименование подразделения</string>
+    <string name="captionOrganizationAddFragment">Новая организация</string>
+    <string name="captionDepartmentAddFragment">Новое подразделение</string>
+    <string name="hintTitlePostEditText">Введите наименование должности</string>
+    <string name="captionPostAddFragment">Новая должность</string>
+    <string name="hintStaffTablePostInput">Выберите должность</string>
+    <string name="hintIsChieffCheckBox">Руководитель подразделения</string>
+    <string name="hintMaxCountEditText">Максимальное количество позиций</string>
+    <string name="hintStaffTableDepartmentInput">Выберите подразделение</string>
+    <string name="hintBasicSalaryEditText">Базовый оклад</string>
+    <string name="projectMenuCaptionTasks">Задачи</string>
+    <string name="captionProjectAddFragment">Новый проект</string>
+    <string name="captionProjectDetailFragment">Информация о проекте</string>
+
+    <string name="lowPriority">Низкий</string>
+    <string name="belowNormalPriority">Ниже нормального</string>
+    <string name="normalPriority">Нормальный</string>
+    <string name="higherNormalPriority">Выше нормального</string>
+    <string name="highPriority">Высокий</string>
+    <string name="captionPostsListFragment">Справочник должностей</string>
+    <string name="captionDepartmentsListFragment">Структура (подразделения)</string>
+    <string name="captionProjectsListFragment">Проекты</string>
+    <string name="captionStaffTableListFragment">Штатное расписание</string>
+    <string name="captionTasksListFragment">Задачи по проекту</string>
+    <string name="captionOrganizationsListFragment">Организации</string>
+    <string name="captionTaskExecutorTitle">Исполнитель</string>
+    <string name="captionTaskStateTitle">Статус</string>
+    <string name="captionTaskDeadlineTitle">Срок</string>
+    <string name="captionTaskTitleTitle">Наименование</string>
+
+
+    <string-array name="priority_level">
+        <item>@string/lowPriority</item>
+        <item>@string/belowNormalPriority</item>
+        <item>@string/normalPriority</item>
+        <item>@string/higherNormalPriority</item>
+        <item>@string/highPriority</item>
+    </string-array>
+
+</resources>

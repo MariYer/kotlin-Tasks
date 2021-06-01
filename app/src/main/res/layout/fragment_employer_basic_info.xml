@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/avatarImageView"
+            android:layout_width="137dp"
+            android:layout_height="121dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/loadAvatarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Загрузить"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="@id/avatarImageView"
+            app:layout_constraintStart_toStartOf="@id/avatarImageView"
+            app:layout_constraintTop_toBottomOf="@id/avatarImageView" />
+
+        <EditText
+            android:id="@+id/surNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Фамилия"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+            app:layout_constraintTop_toTopOf="@id/avatarImageView" />
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Имя"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+            app:layout_constraintTop_toBottomOf="@id/surNameEditText" />
+
+        <EditText
+            android:id="@+id/middleNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Отчество"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+            app:layout_constraintTop_toBottomOf="@id/nameEditText" />
+
+        <TextView
+            android:id="@+id/avatarUriTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+            app:layout_constraintBottom_toBottomOf="@id/loadAvatarButton" />
+
+        <EditText
+            android:id="@+id/birthdayEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Дата рождения"
+            android:inputType="date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loadAvatarButton" />
+
+        <RadioGroup
+            android:id="@+id/sexRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@id/birthdayEditText"
+            app:layout_constraintTop_toBottomOf="@id/loadAvatarButton">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пол:"/>
+
+            <RadioButton
+                android:id="@+id/manSexRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="М" />
+
+            <RadioButton
+                android:id="@+id/womanSexRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ж" />
+
+        </RadioGroup>
+        <TextView
+            android:id="@+id/contactTitleTextView"
+            style="@style/ToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Контакты"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/sexRadioGroup" />
+
+        <EditText
+            android:id="@+id/phoneEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Номер телефона"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contactTitleTextView" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Адрес электронной почты"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phoneEditText" />
+
+        <EditText
+            android:id="@+id/addressEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Адрес проживания"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

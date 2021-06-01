@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        style="@style/ToolbarStyle"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/organization_menu"
+        app:title="@string/app_name"
+        tools:ignore="MissingConstraints" />
+
+    <RadioGroup
+        android:id="@+id/entityRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/jurRadioButton"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <RadioButton
+            android:id="@+id/jurRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/captionJur" />
+
+        <RadioButton
+            android:id="@+id/privRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/captionPriv" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hintTitleOrganization"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entityRadioGroup" />
+
+    <EditText
+        android:id="@+id/innEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="@string/hintInnOrganization"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleEditText" />
+
+    <EditText
+        android:id="@+id/fullTitleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="@string/hintFullTitleOrganization"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/innEditText" />
+
+    <EditText
+        android:id="@+id/notesEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="top"
+        android:hint="@string/hintNotesOrganization"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fullTitleEditText" />
+
+
+    <Button
+        style="@style/ToolbarStyle"
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/captionSaveButton"
+        app:layout_constraintTop_toBottomOf="@id/notesEditText"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
